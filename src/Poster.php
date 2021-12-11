@@ -171,7 +171,7 @@ class Poster
      * 输出
      * @param null $filename 保存图片名称
      */
-    public function output($filename = null)
+    public function output($filename = null,$type = 1)
     {
         $ext = $filename ? pathinfo($filename, PATHINFO_EXTENSION) : 'jpg';
         switch ($ext) {
@@ -195,7 +195,20 @@ class Poster
             header('Content-type:' . $mime);
             call_user_func($function, $this->background);
         } else {
-            call_user_func($function, $this->background, $filename);
+            if ($type == 1){
+                ob_start ();
+                call_user_func($function, $this->background);
+
+                $image_data = ob_get_contents ();
+                ob_end_clean ();
+                $image_data_base64 = base64_encode ($image_data);
+
+                return $image_data_base64;
+            }else{
+
+                call_user_func($function, $this->background, $filename);
+            }
+
         }
     }
 
