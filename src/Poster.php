@@ -33,7 +33,7 @@ class Poster
     {
         $size = explode(',', $image);
         if (count($size) === 2) {
-            $resource = imagecreatetruecolor($size[0], $size[1]);
+            $resource = imagecreatefromstring($image);
         } else {
             if (preg_match('/^https?:\/\//i', $image) || @is_file($image)) {
                 $image = file_get_contents($image);
