@@ -35,9 +35,9 @@ class Poster
         if (count($size) === 2) {
               //  判断php版本是否大于8.0
             if (version_compare(PHP_VERSION, '8.0.0') >= 0) {
-                $resource = imagecreatetruecolor($size[0], $size[1]);
-            }else{
                 $resource = imagecreatefromstring($image);
+            }else{
+                $resource = imagecreatetruecolor($size[0], $size[1]);
             }
         } else {
             if (preg_match('/^https?:\/\//i', $image) || @is_file($image)) {
